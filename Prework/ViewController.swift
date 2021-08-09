@@ -17,6 +17,9 @@ class ViewController: UIViewController {
     @IBOutlet weak var SliderControl: UISlider!
     @IBOutlet weak var CurrencySign: UILabel!
     
+    @IBOutlet weak var ConversionSign: UILabel!
+    @IBOutlet weak var ConversionEquation: UILabel!
+    
     var data = ""
     
     override func viewDidLoad() {
@@ -24,10 +27,20 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view.
         self.title = "Tip Calculator"
         CurrencySign.text = data
+        if (data == "YEN"){
+            ConversionSign.text = "¥"
+        }
+        else if (data == "USD"){
+            ConversionSign.text = "$"
+        }
+        else if (data == "EURO"){
+            ConversionSign.text = "€"
+        }
     }
     
     @IBAction func calculateTip(_ sender: Any) {
         // Get bill amount from text field input
+        ConversionEquation.text = billAmountTextField.text
         let bill = Double(billAmountTextField.text!) ?? 0
     
         // Get Total tip by multiplying tip * tipPercentage
@@ -39,18 +52,23 @@ class ViewController: UIViewController {
         let total = bill + tip
         
         if CurrencySign.text == "USD"{
+            ConversionEquation.text = billAmountTextField.text
             tipAmountLabel.text = String(format: "$%.2f", tip)
             totalLabel.text = String(format:"$%.2f", total)
         }
         else if CurrencySign.text == "YEN"{
-            let YENtip = tip * 0.01271
+            let YENWin = String(bill * 110.28)
+            ConversionEquation.text = YENWin
+            let YENtip = Double(YENWin)! * (Double(Amount) * 0.01)
             let YENmoney = total + YENtip
             // Update Tip Amount Label
             tipAmountLabel.text = String(format: "¥%.2f", YENtip)
             totalLabel.text = String(format:"¥%.2f", YENmoney)
         }
         else if CurrencySign.text == "EURO"{
-            let EUROtip = tip * 0.85
+            let EUROWin = String(bill * 0.85)
+            ConversionEquation.text = String(format:"€%.2f", EUROWin)
+            let EUROtip = Double(EUROWin)! * (Double(Amount) * 0.01)
             let EUROmoney = total + EUROtip
             // Update Tip Amount Label
             tipAmountLabel.text = String(format: "€%.2f", EUROtip)
@@ -88,25 +106,31 @@ class ViewController: UIViewController {
         Amount = Int(sender.value)
         
         // Multiplying by 0.01 so it can be in Percent form
+        let tips = Double(Amount) * 0.01
         let tip = (Double(Amount) * 0.01) * bill
         
         // total
         let total = bill + tip
         
         if CurrencySign.text == "USD"{
+            ConversionEquation.text = String(bill)
             tipAmountLabel.text = String(format: "$%.2f", tip)
             totalLabel.text = String(format:"$%.2f", total)
         }
         else if CurrencySign.text == "YEN"{
-            let YENmoney = total * 0.01271
-            let YENtip = tip * 0.01271
+            let YENWin = String(bill * 110.28)
+            ConversionEquation.text = YENWin
+            let YENtip = tips * Double(YENWin)!
+            let YENmoney = total + YENtip
             // Update Tip Amount Label
             tipAmountLabel.text = String(format: "¥%.2f", YENtip)
             totalLabel.text = String(format:"¥%.2f", YENmoney)
         }
         else if CurrencySign.text == "EURO"{
-            let EUROmoney = total * 0.85
-            let EUROtip = tip * 0.85
+            let EUROWin = String(bill * 0.85)
+            ConversionEquation.text = EUROWin
+            let EUROtip = tips * Double(EUROWin)!
+            let EUROmoney = total + EUROtip
             // Update Tip Amount Label
             tipAmountLabel.text = String(format: "€%.2f", EUROtip)
             totalLabel.text = String(format:"€%.2f", EUROmoney)
