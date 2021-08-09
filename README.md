@@ -44,7 +44,7 @@ The last challenge was trying to get the Keyboard to pop up.
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright [2021] [Jason Mai]
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
