@@ -70,7 +70,7 @@ class ViewController: UIViewController {
         }
         else if CurrencySign.text == "EURO"{
             let EUROWin = String(bill * 0.85)
-            ConversionEquation.text = String(format:"€%.2f", EUROWin)
+            ConversionEquation.text = EUROWin
             let EUROtip = Double(EUROWin)! * (Double(Amount) * 0.01)
             let EUROmoney = total + EUROtip
             // Update Tip Amount Label
