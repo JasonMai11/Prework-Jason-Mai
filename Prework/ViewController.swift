@@ -26,6 +26,9 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.title = "Tip Calculator"
+        
+        billAmountTextField.becomeFirstResponder()
+            
         CurrencySign.text = data
         if (data == "YEN"){
             ConversionSign.text = "¥"
